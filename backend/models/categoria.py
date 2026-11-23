@@ -14,6 +14,7 @@ class Categoria(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=False)
     nombre: Mapped[str] = mapped_column(String(60), nullable=False)
     descripcion: Mapped[str | None] = mapped_column(String(255), nullable=True)
+    stock_minimo: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
 
     # Relación con Producto (1 a N)
     productos: Mapped[list["Producto"]] = relationship(back_populates="categoria")
