@@ -1,12 +1,7 @@
 import unicodedata
+from backend.repositories.categorias_repository import CATEGORIAS
 
 # Datos de prueba que imitan las tablas de la base
-CATEGORIAS = [
-    {"id": 1, "nombre": "Electrónica", "stock_minimo": 5},
-    {"id": 2, "nombre": "Ropa", "stock_minimo": 10},
-    {"id": 3, "nombre": "Alimentos", "stock_minimo": 20},
-]
-
 PRODUCTOS = [
     {"id": 1, "nombre": "Auriculares inalámbricos", "precio_unitario": 45999.0, "stock_actual": 20, "categoria_id": 1},
     {"id": 2, "nombre": "Cargador USB-C", "precio_unitario": 12500.0, "stock_actual": 60, "categoria_id": 1},
