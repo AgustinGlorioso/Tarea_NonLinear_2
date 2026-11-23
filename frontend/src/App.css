@@ -267,3 +267,100 @@ button.boton-principal:hover:not(:disabled) {
     position: static;
   }
 }
+
+/* Aviso tras confirmar un movimiento */
+.aviso {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 16px 0;
+  padding: 10px 16px;
+  background: #e1efe6;
+  border: 1px solid #c5ddcf;
+  border-radius: 10px;
+  color: #276749;
+}
+
+.aviso button {
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  line-height: 1;
+  color: inherit;
+}
+
+/* Ventana emergente del formulario de movimientos */
+.formulario-movimiento {
+  width: 420px;
+  max-width: calc(100vw - 32px);
+  padding: 24px;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.25);
+  color: #1e293b;
+}
+
+.formulario-movimiento::backdrop {
+  background: rgba(15, 23, 42, 0.45);
+}
+
+.formulario-movimiento h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.movimiento-producto {
+  margin: 4px 0 20px;
+  color: #64748b;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0 0 16px;
+  padding: 0;
+  border: none;
+  font-size: 14px;
+  color: #475569;
+}
+
+.campo legend {
+  padding: 0;
+  margin-bottom: 6px;
+}
+
+fieldset.campo {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+}
+
+fieldset.campo legend {
+  width: 100%;
+}
+
+.campo input[type='number'],
+.campo input[type='text'] {
+  padding: 8px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.campo input[aria-invalid='true'] {
+  border-color: #9b2c2c;
+}
+
+.campo .mensaje-error {
+  margin: 0;
+}
+
+.botones-formulario {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+}

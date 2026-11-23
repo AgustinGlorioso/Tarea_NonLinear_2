@@ -3,6 +3,8 @@ import { obtenerCategorias, obtenerProductos } from './api/inventario'
 import GraficoStock from './components/GraficoStock'
 import PanelAlertas from './components/PanelAlertas'
 import TablaProductos from './components/TablaProductos'
+import FormularioMovimiento from './components/FormularioMovimiento'
+import { textoUnidades } from './utils/stock'
 import './App.css'
 
 function App() {
@@ -13,6 +15,8 @@ function App() {
   const [categoriaElegida, setCategoriaElegida] = useState('')
   const [cargando, setCargando] = useState(true)
   const [error, setError] = useState(null)
+  const [productoMovimiento, setProductoMovimiento] = useState(null)
+  const [aviso, setAviso] = useState(null)
 
 // Las categorías y el total de productos se piden una sola vez, al abrir la pantalla.
 // Las alertas necesitan todos los productos, aunque la tabla esté filtrada.
@@ -58,7 +62,18 @@ const alertas = todosLosProductos.filter((p) => p.estado !== 'ok')
   }
 
   function registrarMovimiento(producto) {
-    console.log('Registrar movimiento', producto)
+    setProductoMovimiento(producto)
+  }
+
+  // Todavía no hay POST /movimientos: se muestra lo que se enviaría
+  function confirmarMovimiento(movimiento) {
+    console.log('Movimiento a enviar', movimiento)
+    const accion = movimiento.tipo === 'entrada' ? 'Entrada' : 'Salida'
+    setAviso(
+      `${accion} de ${textoUnidades(movimiento.cantidad)} de ${productoMovimiento.nombre} validada. ` +
+        'Modo demostración: todavía no se guarda.',
+    )
+    setProductoMovimiento(null)
   }
 
   return (
@@ -80,6 +95,14 @@ const alertas = todosLosProductos.filter((p) => p.estado !== 'ok')
       </header>
 
       {mostrarAlertas && <PanelAlertas alertas={alertas} />}
+      {aviso && (
+        <p className="aviso" role="status">
+          {aviso}
+          <button type="button" aria-label="Cerrar aviso" onClick={() => setAviso(null)}>
+            ×
+          </button>
+        </p>
+      )}
 
       <div className="filtros">
         <label>
@@ -116,6 +139,13 @@ const alertas = todosLosProductos.filter((p) => p.estado !== 'ok')
           />
           <GraficoStock productos={productos} categoriaElegida={categoriaElegida} />
         </div>
+      )}
+      {productoMovimiento && (
+        <FormularioMovimiento
+          producto={productoMovimiento}
+          onCancelar={() => setProductoMovimiento(null)}
+          onConfirmar={confirmarMovimiento}
+        />
       )}
     </main>
   )
