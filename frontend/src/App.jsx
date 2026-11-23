@@ -1,22 +1,31 @@
 import { useEffect, useState } from 'react'
 import { obtenerCategorias, obtenerProductos } from './api/inventario'
+import GraficoStock from './components/GraficoStock'
+import PanelAlertas from './components/PanelAlertas'
 import TablaProductos from './components/TablaProductos'
 import './App.css'
 
 function App() {
   const [productos, setProductos] = useState([])
+  const [todosLosProductos, setTodosLosProductos] = useState([])
+  const [mostrarAlertas, setMostrarAlertas] = useState(false)
   const [categorias, setCategorias] = useState([])
   const [categoriaElegida, setCategoriaElegida] = useState('')
   const [cargando, setCargando] = useState(true)
   const [error, setError] = useState(null)
 
-  // Las categorías se piden una sola vez, al abrir la pantalla
-  useEffect(() => {
-    obtenerCategorias()
-      .then(setCategorias)
-      .catch((e) => setError(e.message))
-  }, [])
+// Las categorías y el total de productos se piden una sola vez, al abrir la pantalla.
+// Las alertas necesitan todos los productos, aunque la tabla esté filtrada.
+useEffect(() => {
+  obtenerCategorias()
+    .then(setCategorias)
+    .catch((e) => setError(e.message))
+  obtenerProductos('')
+    .then(setTodosLosProductos)
+    .catch((e) => setError(e.message))
+}, [])
 
+const alertas = todosLosProductos.filter((p) => p.estado !== 'ok')
   // Los productos se vuelven a pedir cada vez que cambia el filtro
   useEffect(() => {
     let ignorar = false // evita que una respuesta vieja pise a una nueva
@@ -56,10 +65,21 @@ function App() {
     <main className="pagina">
       <header className="encabezado">
         <h1>Inventario</h1>
-        <button type="button" disabled title="Próximamente">
-          + Nuevo producto
-        </button>
+        <div className="acciones-encabezado">
+          <button
+            type="button"
+            aria-expanded={mostrarAlertas}
+            onClick={() => setMostrarAlertas(!mostrarAlertas)}
+          >
+            Alertas <span className="contador">{alertas.length}</span>
+          </button>
+          <button type="button" className="boton-principal" disabled title="Próximamente">
+            + Nuevo producto
+          </button>
+        </div>
       </header>
+
+      {mostrarAlertas && <PanelAlertas alertas={alertas} />}
 
       <div className="filtros">
         <label>
@@ -88,11 +108,14 @@ function App() {
       {cargando ? (
         <p>Cargando productos...</p>
       ) : (
-        <TablaProductos
-          productos={productos}
-          onEditar={editarProducto}
-          onRegistrarMovimiento={registrarMovimiento}
-        />
+        <div className='contenido'>
+          <TablaProductos
+            productos={productos}
+            onEditar={editarProducto}
+            onRegistrarMovimiento={registrarMovimiento}
+          />
+          <GraficoStock productos={productos} categoriaElegida={categoriaElegida} />
+        </div>
       )}
     </main>
   )

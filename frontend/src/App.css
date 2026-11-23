@@ -1,6 +1,6 @@
 /* Paleta sobria: grises azulados y un azul apagado como color principal */
 .pagina {
-  max-width: 1000px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 32px 24px;
 }
@@ -56,11 +56,33 @@ input:disabled {
   cursor: not-allowed;
 }
 
+.acciones-encabezado {
+  display: flex;
+  gap: 12px;
+}
+
 /* Botón principal: el único con color de fondo */
-.encabezado button {
+.boton-principal {
   background: #3b5b8c;
   border-color: #3b5b8c;
   color: #ffffff;
+}
+
+button.boton-principal:hover:not(:disabled) {
+  background: #2f4a73;
+}
+
+/* Número de alertas dentro del botón */
+.contador {
+  display: inline-block;
+  min-width: 20px;
+  margin-left: 4px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: #e2e8f0;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
 }
 
 .encabezado button:hover:not(:disabled) {
@@ -77,7 +99,7 @@ input:disabled {
 .tabla-productos th {
   padding: 8px 16px;
   text-align: left;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -140,4 +162,108 @@ input:disabled {
 
 .mensaje-error {
   color: #9b2c2c;
+}
+
+/* Paneles blancos: gráfico y alertas */
+.panel {
+  margin: 16px 0;
+  padding: 16px 20px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+}
+
+.panel h2 {
+  margin: 0 0 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.grafico-encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.selector-medida {
+  display: flex;
+}
+
+.selector-medida button {
+  border-radius: 0;
+  margin-left: -1px;
+}
+
+.selector-medida button:first-child {
+  border-radius: 8px 0 0 8px;
+  margin-left: 0;
+}
+
+.selector-medida button:last-child {
+  border-radius: 0 8px 8px 0;
+}
+
+.selector-medida button.activo {
+  background: #e8eef7;
+  border-color: #3b5b8c;
+  color: #2f4a73;
+  font-weight: 600;
+  position: relative;
+}
+
+.panel-alertas ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.alerta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.alerta:last-child {
+  border-bottom: none;
+}
+
+.alerta-nombre {
+  font-weight: 500;
+}
+
+.alerta-detalle {
+  margin-left: auto;
+  font-size: 14px;
+  color: #64748b;
+}
+
+/* Tabla a la izquierda, gráfico a la derecha */
+.contenido {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 500px;
+  gap: 10px;
+  align-items: start;
+}
+
+/* El gráfico acompaña mientras se recorre la tabla */
+.contenido .grafico {
+  position: sticky;
+  top: 16px;
+  margin: 8px 0 0;
+}
+
+/* En pantallas angostas vuelven a quedar uno debajo del otro */
+@media (max-width: 1100px) {
+  .contenido {
+    grid-template-columns: 1fr;
+  }
+
+  .contenido .grafico {
+    position: static;
+  }
 }
