@@ -1,0 +1,366 @@
+/* Paleta sobria: grises azulados y un azul apagado como color principal */
+.pagina {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+.encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.encabezado h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.filtros {
+  display: flex;
+  gap: 16px;
+  margin: 24px 0 8px;
+  color: #475569;
+  font-size: 14px;
+}
+
+select,
+input[type='search'] {
+  padding: 8px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #1e293b;
+  font-size: 14px;
+}
+
+button {
+  padding: 8px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #334155;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  background: #f1f5f9;
+}
+
+button:disabled,
+input:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.acciones-encabezado {
+  display: flex;
+  gap: 12px;
+}
+
+/* Botón principal: el único con color de fondo */
+.boton-principal {
+  background: #3b5b8c;
+  border-color: #3b5b8c;
+  color: #ffffff;
+}
+
+button.boton-principal:hover:not(:disabled) {
+  background: #2f4a73;
+}
+
+/* Número de alertas dentro del botón */
+.contador {
+  display: inline-block;
+  min-width: 20px;
+  margin-left: 4px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: #e2e8f0;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.encabezado button:hover:not(:disabled) {
+  background: #2f4a73;
+}
+
+/* Tabla: cada fila es una tarjeta blanca separada de las demás */
+.tabla-productos {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+}
+
+.tabla-productos th {
+  padding: 8px 16px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.tabla-productos td {
+  padding: 14px 16px;
+  background: #ffffff;
+  border-top: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.tabla-productos td:first-child {
+  border-left: 1px solid #e2e8f0;
+  border-radius: 10px 0 0 10px;
+  font-weight: 500;
+}
+
+.tabla-productos td:last-child {
+  border-right: 1px solid #e2e8f0;
+  border-radius: 0 10px 10px 0;
+}
+
+.tabla-productos .numero {
+  text-align: right;
+}
+
+.fila-clickeable {
+  cursor: pointer;
+}
+
+.fila-clickeable:hover td {
+  background: #f8fafc;
+}
+
+/* Estado: etiqueta de texto con color suave (no depende solo del color) */
+.estado-etiqueta {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.estado-sin_stock .estado-etiqueta {
+  background: #fbe4e4;
+  color: #9b2c2c;
+}
+
+.estado-bajo .estado-etiqueta {
+  background: #fdf0d5;
+  color: #8a5a12;
+}
+
+.estado-ok .estado-etiqueta {
+  background: #e1efe6;
+  color: #276749;
+}
+
+.mensaje-error {
+  color: #9b2c2c;
+}
+
+/* Paneles blancos: gráfico y alertas */
+.panel {
+  margin: 16px 0;
+  padding: 16px 20px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+}
+
+.panel h2 {
+  margin: 0 0 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.grafico-encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.selector-medida {
+  display: flex;
+}
+
+.selector-medida button {
+  border-radius: 0;
+  margin-left: -1px;
+}
+
+.selector-medida button:first-child {
+  border-radius: 8px 0 0 8px;
+  margin-left: 0;
+}
+
+.selector-medida button:last-child {
+  border-radius: 0 8px 8px 0;
+}
+
+.selector-medida button.activo {
+  background: #e8eef7;
+  border-color: #3b5b8c;
+  color: #2f4a73;
+  font-weight: 600;
+  position: relative;
+}
+
+.panel-alertas ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.alerta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.alerta:last-child {
+  border-bottom: none;
+}
+
+.alerta-nombre {
+  font-weight: 500;
+}
+
+.alerta-detalle {
+  margin-left: auto;
+  font-size: 14px;
+  color: #64748b;
+}
+
+/* Tabla a la izquierda, gráfico a la derecha */
+.contenido {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 500px;
+  gap: 10px;
+  align-items: start;
+}
+
+/* El gráfico acompaña mientras se recorre la tabla */
+.contenido .grafico {
+  position: sticky;
+  top: 16px;
+  margin: 8px 0 0;
+}
+
+/* En pantallas angostas vuelven a quedar uno debajo del otro */
+@media (max-width: 1100px) {
+  .contenido {
+    grid-template-columns: 1fr;
+  }
+
+  .contenido .grafico {
+    position: static;
+  }
+}
+
+/* Aviso tras confirmar un movimiento */
+.aviso {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 16px 0;
+  padding: 10px 16px;
+  background: #e1efe6;
+  border: 1px solid #c5ddcf;
+  border-radius: 10px;
+  color: #276749;
+}
+
+.aviso button {
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  line-height: 1;
+  color: inherit;
+}
+
+/* Ventana emergente del formulario de movimientos */
+.formulario-movimiento {
+  width: 420px;
+  max-width: calc(100vw - 32px);
+  padding: 24px;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.25);
+  color: #1e293b;
+}
+
+.formulario-movimiento::backdrop {
+  background: rgba(15, 23, 42, 0.45);
+}
+
+.formulario-movimiento h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.movimiento-producto {
+  margin: 4px 0 20px;
+  color: #64748b;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0 0 16px;
+  padding: 0;
+  border: none;
+  font-size: 14px;
+  color: #475569;
+}
+
+.campo legend {
+  padding: 0;
+  margin-bottom: 6px;
+}
+
+fieldset.campo {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+}
+
+fieldset.campo legend {
+  width: 100%;
+}
+
+.campo input[type='number'],
+.campo input[type='text'] {
+  padding: 8px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.campo input[aria-invalid='true'] {
+  border-color: #9b2c2c;
+}
+
+.campo .mensaje-error {
+  margin: 0;
+}
+
+.botones-formulario {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+}
